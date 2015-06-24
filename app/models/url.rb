@@ -8,6 +8,8 @@ class Url < ActiveRecord::Base
 	validates :original_url, format: { with: URI.regexp }, if: Proc.new { |a| a.original_url.present? }
 	validates :short_url, format: { with: /\A[-a-z]+\Z/ }
 
+	BASE_DOMAIN = nil #using root domain if nil
+
 	delegate :redirection, to: :url_redirection
 
 	def url_redirection
