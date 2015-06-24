@@ -1,0 +1,10 @@
+p#notice = notice
+
+.link.short-url
+  p Your short URL link:
+  p = url_link @url
+.link.original-url
+  p Your Original URL link:
+  p = @url.original_url
+
+= link_to 'Create another one', new_url_path

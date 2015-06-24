@@ -1,0 +1,21 @@
+= form_for(@url) do |f|
+  - if @url.errors.any?
+    #error_explanation
+      h2 #{pluralize(@url.errors.count, "error")} prohibited this url from being saved:
+      ul
+        - @url.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :short_url
+    br
+    = base_domain
+    = f.text_field :short_url
+  .field
+    = f.label :original_url
+    | (should include http:// or https://)
+    br
+    = f.text_area :original_url
+  .actions
+    = f.submit
+
