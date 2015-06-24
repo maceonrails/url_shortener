@@ -15,4 +15,8 @@ class Url < ActiveRecord::Base
 	def url_redirection
 		UrlRedirection.new self
 	end
+
+	def redirected
+		stats.count
+	end
 end
