@@ -14,7 +14,7 @@
   <tbody>
     <% @urls.each do |url| %>
       <tr>
-        <td><%= url.short_url %></td>
+        <td><%= url_link url %></td>
         <td><%= url.original_url %></td>
         <td><%= link_to 'Show', url %></td>
         <td><%= link_to 'Edit', edit_url_path(url) %></td>

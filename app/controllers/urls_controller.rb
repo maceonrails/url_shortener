@@ -1,5 +1,5 @@
 class UrlsController < ApplicationController
-  before_action :set_url, only: [:show, :edit, :update, :destroy]
+  before_action :set_url, only: [:show, :edit, :update, :destroy, :redirect]
 
   # GET /urls
   # GET /urls.json
@@ -28,7 +28,7 @@ class UrlsController < ApplicationController
 
     respond_to do |format|
       if @url.save
-        format.html { redirect_to @url, notice: 'Url was successfully created.' }
+        format.html { redirect_to url_url(@url.short_url), notice: 'Url was successfully created.' }
         format.json { render :show, status: :created, location: @url }
       else
         format.html { render :new }
@@ -61,10 +61,18 @@ class UrlsController < ApplicationController
     end
   end
 
+  def redirect
+    if @url
+      redirect_to @url.redirection(request), :status => :moved_permanently
+    else
+      redirect_to '/', notice: "there no any redirection for vanity #{params[:id]}"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_url
-      @url = Url.find(params[:id])
+      @url = Url.find_by_short_url(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
